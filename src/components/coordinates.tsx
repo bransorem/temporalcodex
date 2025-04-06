@@ -10,6 +10,8 @@ import {
 import { CoordinateForm } from './addCoordinate'
 import { useState } from 'react';
 
+export type Symbols = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '-' | '=' | '@'
+
 type CoordData = {
   data: {
     message: string;
@@ -25,7 +27,7 @@ type CoordinateTableProps = {
   coordinates: Coordinate[];
 }
 
-const fetchCoordinate = async (code: string) => {
+export const fetchCoordinate = async (code: string) => {
   const data = await fetch(`/api/code/${code}`)
   return await data.json<CoordData>()
 }

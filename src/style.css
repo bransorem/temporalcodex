@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 
+@font-face{
+  font-family: "Timeless";
+  src:local("Timeless-Regular"),
+  url('./assets/fonts/Timeless_v4-Regular.ttf')
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

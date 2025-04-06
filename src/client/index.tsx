@@ -4,9 +4,9 @@ import {
   RouterProvider,
   createRouter,
 } from '@tanstack/react-router'
-import { indexRoute, rootRoute, strangerRoute } from './routes'
+import { clockRoute, rootRoute, strangerRoute } from './routes'
 
-const routeTree = rootRoute.addChildren([indexRoute, strangerRoute])
+const routeTree = rootRoute.addChildren([clockRoute, strangerRoute])
 
 const router = createRouter({ routeTree })
 

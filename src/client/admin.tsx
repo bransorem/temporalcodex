@@ -1,5 +1,5 @@
 
-function Page({ children }: any) {
+function Admin({ children }: any) {
   return (
     <div className="bg-white">
       <header className="absolute inset-x-0 top-0 z-50">
@@ -14,7 +14,7 @@ function Page({ children }: any) {
         </nav>
       </header>
       <div className="relative isolate px-6 pt-14 lg:px-8">
-        <div className="mx-auto max-w-2xl py-28 sm:py-32 lg:py-32">
+        <div className="mx-auto max-w-2xl py-18 sm:py-24 lg:py-24">
           <div className="text-center">
             <h1 className="text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Temporal Codex</h1>
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">Only those may enter the ball who have the correct coordinates.</p>
@@ -28,4 +28,4 @@ function Page({ children }: any) {
   );
 }
 
-export default Page;
+export default Admin;
