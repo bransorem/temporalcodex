@@ -2,6 +2,9 @@
 
 This is a project to implement a puzzle interface for a 3-digit KV-store.
 
+![](https://github.com/bransorem/temporalcodex/blob/main/example/ui.gif)
+![](https://github.com/bransorem/temporalcodex/blob/main/example/admin.gif)
+
 Stack:
 
 - [Hono](https://hono.dev/) - Back-end framework
