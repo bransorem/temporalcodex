@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "logue",
+  "name": "codex",
   "compatibility_date": "2025-03-27",
   "main": "./src/server/index.tsx",
   "assets": {
@@ -13,7 +13,7 @@
 	"kv_namespaces": [
     {
       "binding": "CODEX",
-      "id": "abc"
+      "id": "abcd"
     }
   ]
 }
