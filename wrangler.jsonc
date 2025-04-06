@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "logue",
+  "compatibility_date": "2025-03-27",
+  "main": "./src/server/index.tsx",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "dist"
+  },
+	"observability": {
+		"enabled": true
+	},
+	"kv_namespaces": [
+    {
+      "binding": "CODEX",
+      "id": "abcd"
+    }
+  ]
+}
