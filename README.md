@@ -12,6 +12,7 @@ Stack:
 - [Shadcn](https://ui.shadcn.com/) - UI components
 - [Cloudflare Workers](https://developers.cloudflare.com/workers/) - simple hosting
 - [Cloudflare KV](https://developers.cloudflare.com/kv/) - KV store for data
+- [React Hook Form](https://react-hook-form.com/) - form framework
 
 ## Installation
 
