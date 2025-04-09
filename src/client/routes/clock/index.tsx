@@ -42,7 +42,16 @@ export function Clock() {
       const c = code.join('')
       fetchCoordinate(c).then((r) => {
         if (r?.data?.message) {
-          setMsg(r.data.message)
+          // check if message is url
+          try {
+            const url = new URL(r.data.message)
+            // if it is then redirect
+            if (url.origin) {
+              window.location.href = url.toString()
+            }
+          } catch (e) {
+            setMsg(r.data.message)
+          }
           setFail(false)
         } else {
           setFail(true)

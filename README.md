@@ -12,10 +12,29 @@ Stack:
 - [Vite](https://vite.dev/) - Build tool
 - [Tailwind](https://tailwindcss.com/) - CSS framework
 - [Tanstack Router](https://tanstack.com/router/latest) - Front-end routing
+- [Tanstack Query](https://tanstack.com/query/v4) - Front-end query engine
 - [Shadcn](https://ui.shadcn.com/) - UI components
 - [Cloudflare Workers](https://developers.cloudflare.com/workers/) - simple hosting
 - [Cloudflare KV](https://developers.cloudflare.com/kv/) - KV store for data
 - [React Hook Form](https://react-hook-form.com/) - form framework
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/en)
+
+Homebrew:
+
+```bash
+brew install node
+npm i -g pnpm
+```
+
+Manual:
+
+Download and install https://nodejs.org/dist/v22.14.0/node-v22.14.0.pkg
+
+Then: `npm i -g pnpm`
+
 
 ## Installation
 
@@ -30,7 +49,7 @@ Set Cloudflare KV-store key in `wrangler.jsonc`
 Start a Wrangler dev server
 
 ```bash
-npx wrangler dev --persist-to data --local
+pnpm data
 ```
 
 Start dev server

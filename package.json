@@ -1,8 +1,10 @@
 {
   "name": "temporal-codex",
   "private": true,
+  "version": "0.2",
   "type": "module",
   "scripts": {
+    "data": "npx wrangler dev --persist-to data --local",
     "dev": "vite",
     "build": "vite build && vite build --ssr",
     "preview": "wrangler dev dist-server/index.js",
@@ -15,6 +17,7 @@
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "@tanstack/react-query": "^5.72.1",
     "@tanstack/react-router": "^1.114.34",
     "class-variance-authority": "^0.7.1",
     "hono": "^4.7.5",

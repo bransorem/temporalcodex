@@ -3,7 +3,18 @@ import { HTTPException } from 'hono/http-exception'
 import { renderer } from './renderer'
 import { NotFound } from './404'
 
-const MAX_CODES = 200
+const MAX_CODES = 501
+
+// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
+async function digestMessage(message: string) {
+  const msgUint8 = new TextEncoder().encode(message); // encode as (utf-8) Uint8Array
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8); // hash the message
+  const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+  const hashHex = hashArray
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join(""); // convert bytes to hex string
+  return hashHex;
+}
 
 const app = new Hono<{ Bindings: CloudflareBindings }>()
 
@@ -15,9 +26,34 @@ app.get('/api/code', async (c) => {
   return c.json({ message: 'Hello from API' })
 })
 
+app.get('/api/stranger/name', async (c) => {
+  const p = await c.env.CODEX.get('strangername')
+  return c.json({ required: !!(p && p.length > 8) })
+})
+
+app.post('/api/stranger/name', async (c) => {
+  const vals = await c.req.json()
+  const hexIn = await digestMessage(vals.password)
+  const hexOut = await c.env.CODEX.get('strangername')
+  return c.json({ success: hexIn == hexOut })
+})
+
+app.post('/api/stranger/name/give', async (c) => {
+  const vals = await c.req.json()
+
+  if (vals.password !== vals.confirm) {
+    return c.json({ success: false })
+  }
+
+  const hex = await digestMessage(vals.password)
+  await c.env.CODEX.put('strangername', hex)
+  return c.json({ success: true })
+})
+
 app.get('/api/code/list', async (c) => {
   const o = await c.env.CODEX.list({ limit: MAX_CODES })
-  return c.json(o.keys.map(n =>
+  const k = o.keys.filter(a => a.name != 'strangername')
+  return c.json(k.map(n =>
     ({
       location: n.name,
       data: { message: '' },

@@ -1,26 +1,37 @@
 import Page from '@/client/admin'
 import { Coordinate, CoordinateTable } from '@/components/coordinates'
-import { use, Suspense } from 'react'
+import { useState } from 'react'
 import { createRoute } from '@tanstack/react-router'
 import { rootRoute } from '../root'
-
-const fetchData = async () => {
-  const data = await fetch('/api/code/list')
-  return data.json<Coordinate[]>()
-}
-
-export const StrangerComponent = ({ promise }: { promise: Promise<Coordinate[]> }) => {
-  const data = use(promise)
-  return <CoordinateTable coordinates={data} />
-}
+import { StrangerEntry, StrangerName } from '@/components/pass'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 export function Stranger() {
+  const [show, setShow] = useState(false)
+
+  const { data: hasPassword } = useSuspenseQuery({
+    queryKey: ['passwordname'],
+    queryFn: () => fetch('/api/stranger/name')
+      .then(d => d.json<{ required: boolean }>())
+  })
+
+  const { data } = useSuspenseQuery({
+    queryKey: ['coordinates'],
+    queryFn: () => fetch('/api/code/list').then(d => d.json<Coordinate[]>())
+  })
+
   return (
     <>
       <Page>
-        <Suspense fallback={'initializing...'}>
-          <StrangerComponent promise={fetchData()} />
-        </Suspense>
+        { hasPassword?.required && !show &&
+          <StrangerEntry onChange={(v) => setShow(v) } />
+        }
+        { (!hasPassword?.required || show) && data &&
+          <div className="flex flex-col">
+            <StrangerName />
+            <CoordinateTable coordinates={data} />
+          </div>
+        }
       </Page>
     </>
   )
